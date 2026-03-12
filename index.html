@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>What Is Here — Describing Emotions Without Judgment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --parchment:   #F7F0E4;
+  --cream:       #FDF8F0;
+  --warm-sand:   #E8D5B5;
+  --sage:        #87A878;
+  --deep-sage:   #5C7A4E;
+  --terracotta:  #C4765A;
+  --deep-terra:  #A0522D;
+  --teal:        #5EAAA8;
+  --deep-teal:   #3D7E7C;
+  --soft-purple: #9B7BB8;
+  --deep-purple: #6B4F8A;
+  --gold:        #B8860B;
+  --gold-light:  #D4A843;
+  --midnight:    #2C1F14;
+  --slate:       #4A3728;
+  --warm-gray:   #7A6855;
+  --ink:         #1A120A;
+
+  --grad-sage:    linear-gradient(135deg,#87A878,#5EAAA8);
+  --grad-terra:   linear-gradient(135deg,#C4765A,#9B7BB8);
+  --grad-gold:    linear-gradient(135deg,#B8860B,#D4A843);
+  --grad-teal:    linear-gradient(135deg,#5EAAA8,#9B7BB8);
+}
+
+body{
+  font-family:'EB Garamond',Georgia,serif;
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(196,118,90,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(94,170,168,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 60% 40%, rgba(155,123,184,0.05) 0%, transparent 50%);
+  min-height:100vh;
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+/* ── Texture blobs ── */
+.blob{
+  position:fixed;border-radius:50%;filter:blur(80px);
+  opacity:0.18;animation:drift 25s infinite ease-in-out;
+  pointer-events:none;z-index:0;
+}
+.blob1{width:400px;height:400px;background:var(--terracotta);top:-150px;left:-120px;}
+.blob2{width:500px;height:500px;background:var(--teal);bottom:-200px;right:-160px;animation-delay:-9s;}
+.blob3{width:300px;height:300px;background:var(--soft-purple);top:45%;left:55%;animation-delay:-16s;}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(25px,-25px) scale(1.07);}
+  66%{transform:translate(-18px,18px) scale(0.94);}
+}
+
+/* ── Layout ── */
+.container{max-width:1060px;margin:0 auto;padding:2rem;position:relative;z-index:1;}
+
+/* ── Header ── */
+.site-header{text-align:center;margin-bottom:2.5rem;animation:fadeUp 0.7s ease both;}
+.site-header h1{
+  font-family:'Cinzel',serif;
+  font-size:2.6rem;font-weight:900;letter-spacing:0.04em;
+  line-height:1.15;
+  background:var(--grad-terra);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:0.4rem;
+}
+.site-header .tagline{
+  font-family:'EB Garamond',serif;font-size:1.15rem;font-style:italic;
+  color:var(--warm-gray);letter-spacing:0.02em;
+}
+.ornament{
+  display:block;text-align:center;
+  font-family:'Cinzel',serif;color:var(--gold-light);
+  font-size:1rem;letter-spacing:0.3em;margin:0.6rem 0;
+  opacity:0.7;
+}
+
+/* ── Progress ── */
+.progress-wrap{
+  background:rgba(184,134,11,0.12);border-radius:6px;
+  height:5px;margin-bottom:2rem;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:var(--grad-gold);
+  border-radius:6px;transition:width 0.5s ease;
+}
+
+/* ── Nav pills ── */
+.nav-pills{
+  display:flex;gap:0.5rem;justify-content:center;
+  flex-wrap:wrap;margin-bottom:2.5rem;
+}
+.nav-pill{
+  padding:0.5rem 1.2rem;border-radius:50px;
+  background:rgba(247,240,228,0.85);
+  border:1.5px solid rgba(184,134,11,0.2);
+  color:var(--slate);cursor:pointer;
+  font-family:'Cinzel',serif;font-size:0.78rem;font-weight:600;
+  letter-spacing:0.06em;
+  box-shadow:0 2px 8px rgba(44,31,20,0.08);
+  transition:all 0.25s ease;backdrop-filter:blur(4px);
+}
+.nav-pill:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(44,31,20,0.13);}
+.nav-pill.active{background:var(--grad-terra);color:#fff;border-color:transparent;}
+
+/* ── Pages ── */
+.page{display:none;animation:fadeUp 0.5s ease;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── Cards ── */
+.card{
+  background:rgba(253,248,240,0.88);
+  border-radius:16px;padding:2rem;
+  box-shadow:0 6px 32px rgba(44,31,20,0.10),0 1px 0 rgba(184,134,11,0.12) inset;
+  margin-bottom:1.8rem;position:relative;overflow:hidden;
+  border:1px solid rgba(184,134,11,0.13);
+  backdrop-filter:blur(6px);
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad-terra);
+}
+.card.teal::before{background:var(--grad-sage);}
+.card.purple::before{background:var(--grad-teal);}
+.card.gold::before{background:var(--grad-gold);}
+
+.card h2{
+  font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;
+  color:var(--midnight);letter-spacing:0.04em;
+  display:flex;align-items:center;gap:0.7rem;
+  margin-bottom:0.9rem;flex-wrap:wrap;
+}
+.card h3{
+  font-family:'Cinzel',serif;font-size:1.05rem;font-weight:600;
+  letter-spacing:0.05em;color:var(--deep-terra);margin-bottom:0.6rem;
+}
+
+.sym-badge{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:1rem;color:#fff;flex-shrink:0;
+}
+.sb-terra{background:var(--grad-terra);}
+.sb-sage {background:var(--grad-sage);}
+.sb-teal {background:var(--grad-teal);}
+.sb-gold {background:var(--grad-gold);}
+
+/* timing badge */
+.t-badge{
+  font-family:'EB Garamond',serif;font-size:0.82rem;font-style:italic;
+  padding:0.2rem 0.7rem;border-radius:20px;
+  background:rgba(184,134,11,0.1);color:var(--gold);
+  margin-left:auto;flex-shrink:0;
+}
+
+/* pass reminder */
+.pass-note{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  background:rgba(155,123,184,0.08);
+  border-left:3px solid var(--soft-purple);
+  padding:0.75rem 1rem;border-radius:0 10px 10px 0;
+  margin-bottom:1.3rem;
+  font-size:0.95rem;color:var(--slate);font-style:italic;
+}
+.pass-sym{color:var(--soft-purple);flex-shrink:0;font-size:1rem;margin-top:2px;}
+
+/* info blocks */
+.ib{padding:1.1rem 1.3rem;border-radius:12px;margin-bottom:1rem;}
+.ib h4{font-family:'Cinzel',serif;font-size:0.92rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.5rem;}
+.ib ul{list-style:none;color:var(--slate);line-height:1.85;}
+.ib ul li::before{content:"◆ ";font-size:0.7rem;}
+.ib p{color:var(--slate);line-height:1.8;font-size:0.97rem;}
+
+.ib.terra{background:rgba(196,118,90,0.08);}
+.ib.terra h4,.ib.terra ul li::before{color:var(--deep-terra);}
+.ib.sage{background:rgba(135,168,120,0.1);}
+.ib.sage h4,.ib.sage ul li::before{color:var(--deep-sage);}
+.ib.teal{background:rgba(94,170,168,0.09);}
+.ib.teal h4,.ib.teal ul li::before{color:var(--deep-teal);}
+.ib.purple{background:rgba(155,123,184,0.09);}
+.ib.purple h4,.ib.purple ul li::before{color:var(--deep-purple);}
+.ib.gold{background:rgba(184,134,11,0.07);}
+.ib.gold h4,.ib.gold ul li::before{color:var(--gold);}
+
+/* validation box */
+.val-box{
+  background:linear-gradient(135deg,rgba(196,118,90,0.07),rgba(155,123,184,0.07));
+  border-radius:12px;padding:1.2rem 1.4rem;
+  border:1px solid rgba(184,134,11,0.15);
+  color:var(--slate);line-height:1.8;font-size:0.97rem;margin:1rem 0;
+}
+.val-box strong{color:var(--deep-terra);}
+
+/* expandable */
+.expandable{border-radius:12px;overflow:hidden;margin-bottom:0.8rem;border:1px solid rgba(184,134,11,0.15);}
+.exp-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.85rem 1.1rem;cursor:pointer;background:rgba(247,240,228,0.6);
+  transition:background 0.2s;
+}
+.exp-header:hover{background:rgba(232,213,181,0.5);}
+.exp-header h4{font-family:'Cinzel',serif;font-size:0.88rem;font-weight:600;letter-spacing:0.05em;color:var(--midnight);}
+.exp-icon{font-family:'Cinzel',serif;color:var(--gold);font-size:1.1rem;transition:transform 0.3s;}
+.exp-icon.open{transform:rotate(45deg);}
+.exp-body{display:none;padding:0 1.1rem 1.1rem;background:rgba(253,248,240,0.7);}
+.exp-body.open{display:block;animation:fadeUp 0.3s ease;}
+
+/* facilitator toggle */
+.fac-wrap{background:rgba(94,170,168,0.07);border-radius:10px;overflow:hidden;margin-top:1.1rem;}
+.fac-btn{
+  width:100%;background:none;border:none;
+  padding:0.75rem 1.1rem;text-align:left;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:0.78rem;font-weight:700;
+  letter-spacing:0.06em;color:var(--deep-teal);
+  display:flex;align-items:center;gap:0.5rem;
+}
+.fac-body{display:none;padding:0 1.1rem 0.9rem;font-size:0.9rem;color:var(--slate);line-height:1.75;}
+.fac-body.open{display:block;}
+
+/* ── Check-in multi-step ── */
+.checkin-step{display:none;}
+.checkin-step.active{display:block;animation:fadeUp 0.4s ease;}
+.step-counter{
+  font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.1em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;
+}
+
+/* breathing animation */
+.breath-circle{
+  width:120px;height:120px;border-radius:50%;
+  margin:1.5rem auto;
+  background:radial-gradient(circle,rgba(196,118,90,0.25),rgba(155,123,184,0.15));
+  border:2px solid rgba(184,134,11,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;
+  color:var(--gold);text-align:center;
+  transition:transform 4s ease, opacity 4s ease;
+}
+.breath-circle.inhale{transform:scale(1.4);opacity:1;}
+.breath-circle.exhale{transform:scale(1);opacity:0.6;}
+
+/* polyvagal selector */
+.poly-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.8rem;margin:1rem 0;}
+.poly-card{
+  padding:1rem;border-radius:12px;text-align:center;cursor:pointer;
+  border:2px solid transparent;transition:all 0.25s ease;
+  background:rgba(247,240,228,0.7);
+}
+.poly-card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(44,31,20,0.12);}
+.poly-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,0.15);}
+.poly-card h5{font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.3rem;}
+.poly-card p{font-size:0.83rem;color:var(--slate);line-height:1.5;}
+.poly-card.grounded h5{color:var(--deep-sage);}
+.poly-card.activated h5{color:var(--deep-terra);}
+.poly-card.withdrawn h5{color:var(--deep-teal);}
+
+/* emotion picker */
+.emotion-grid{
+  display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0;
+}
+.emo-chip{
+  padding:0.35rem 0.9rem;border-radius:20px;
+  background:rgba(247,240,228,0.8);
+  border:1.5px solid rgba(184,134,11,0.18);
+  font-family:'EB Garamond',serif;font-size:0.92rem;
+  color:var(--slate);cursor:pointer;transition:all 0.2s ease;
+}
+.emo-chip:hover{background:rgba(232,213,181,0.6);border-color:var(--gold-light);}
+.emo-chip.selected{background:var(--grad-terra);color:#fff;border-color:transparent;}
+
+/* ── Psychoeducation ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+@media(max-width:680px){.two-col{grid-template-columns:1fr;}}
+
+/* compare box */
+.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0;}
+@media(max-width:580px){.compare-wrap{grid-template-columns:1fr;}}
+.compare-side{padding:1.1rem;border-radius:12px;}
+.compare-side.bad{background:rgba(196,118,90,0.1);}
+.compare-side.good{background:rgba(135,168,120,0.1);}
+.compare-side h5{font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.05em;margin-bottom:0.6rem;}
+.compare-side.bad h5{color:var(--deep-terra);}
+.compare-side.good h5{color:var(--deep-sage);}
+.compare-side ul{list-style:none;color:var(--slate);line-height:1.9;font-size:0.93rem;}
+.compare-side ul li::before{content:"— ";}
+
+/* ODP model */
+.odp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0;}
+@media(max-width:600px){.odp-grid{grid-template-columns:1fr;}}
+.odp-card{
+  padding:1.2rem;border-radius:12px;text-align:center;
+  border:1px solid rgba(184,134,11,0.15);
+}
+.odp-card .odp-num{
+  font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;
+  line-height:1;margin-bottom:0.4rem;
+}
+.odp-card h5{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;letter-spacing:0.06em;margin-bottom:0.4rem;}
+.odp-card p{font-size:0.88rem;color:var(--slate);line-height:1.6;}
+.odp1{background:rgba(196,118,90,0.08);}
+.odp1 .odp-num,.odp1 h5{color:var(--deep-terra);}
+.odp2{background:rgba(94,170,168,0.08);}
+.odp2 .odp-num,.odp2 h5{color:var(--deep-teal);}
+.odp3{background:rgba(135,168,120,0.09);}
+.odp3 .odp-num,.odp3 h5{color:var(--deep-sage);}
+
+/* secondary emotion diagram */
+.secondary-wrap{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:0.5rem;margin:1.2rem 0;text-align:center;
+}
+.sec-box{
+  padding:0.75rem 1.1rem;border-radius:10px;
+  font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;
+  letter-spacing:0.04em;
+}
+.sec-primary{background:rgba(196,118,90,0.12);color:var(--deep-terra);}
+.sec-arrow{color:var(--gold);font-size:1.3rem;padding:0 0.3rem;}
+.sec-judgment{background:rgba(155,123,184,0.12);color:var(--deep-purple);}
+.sec-secondary{background:rgba(196,118,90,0.18);color:var(--deep-terra);border:1.5px solid rgba(196,118,90,0.3);}
+.sec-alt-arrow{color:var(--deep-sage);font-size:1.3rem;padding:0 0.3rem;}
+.sec-describe{background:rgba(135,168,120,0.12);color:var(--deep-sage);}
+.sec-peace{background:rgba(135,168,120,0.18);color:var(--deep-sage);border:1.5px solid rgba(135,168,120,0.3);}
+.sec-row{display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;justify-content:center;}
+.sec-label{
+  font-family:'EB Garamond',serif;font-size:0.8rem;font-style:italic;
+  color:var(--warm-gray);width:100%;text-align:center;margin-bottom:0.3rem;
+}
+
+/* ── Vocabulary ── */
+.vocab-category{margin-bottom:1.5rem;}
+.vocab-category h4{
+  font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;letter-spacing:0.07em;
+  color:var(--gold);margin-bottom:0.7rem;border-bottom:1px solid rgba(184,134,11,0.2);padding-bottom:0.4rem;
+}
+.vocab-words{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.vocab-word{
+  padding:0.3rem 0.75rem;border-radius:16px;
+  font-family:'EB Garamond',serif;font-size:0.9rem;
+  color:var(--slate);background:rgba(247,240,228,0.7);
+  border:1px solid rgba(184,134,11,0.15);cursor:pointer;transition:all 0.2s;
+}
+.vocab-word:hover,.vocab-word.picked{background:var(--grad-terra);color:#fff;border-color:transparent;}
+
+/* ── Practice tool ── */
+.practice-steps{counter-reset:pstep;}
+.pstep{
+  display:none;
+  animation:fadeUp 0.4s ease;
+}
+.pstep.active{display:block;}
+
+.pstep-num{
+  font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.12em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:0.3rem;
+}
+
+.input-group{margin-bottom:1.2rem;}
+.input-group label{
+  display:block;margin-bottom:0.5rem;
+  font-family:'EB Garamond',serif;font-size:1rem;font-weight:500;
+  color:var(--midnight);line-height:1.5;
+}
+.input-group label em{color:var(--warm-gray);font-size:0.92rem;}
+.input-group textarea,.input-group select{
+  width:100%;padding:0.9rem 1rem;
+  border:1.5px solid rgba(184,134,11,0.2);border-radius:10px;
+  font-family:'EB Garamond',serif;font-size:1rem;
+  background:rgba(253,248,240,0.8);color:var(--ink);
+  resize:vertical;min-height:80px;transition:all 0.25s;
+}
+.input-group textarea:focus,.input-group select:focus{
+  outline:none;border-color:var(--gold-light);
+  box-shadow:0 0 0 3px rgba(184,134,11,0.08);
+}
+.input-group select{min-height:unset;resize:none;}
+
+/* reflection result */
+.result-box{
+  display:none;margin-top:1.5rem;
+  padding:1.5rem;border-radius:14px;
+  background:rgba(247,240,228,0.9);
+  border:1.5px solid rgba(184,134,11,0.2);
+  box-shadow:0 4px 20px rgba(44,31,20,0.08);
+}
+.result-box.show{display:block;animation:fadeUp 0.5s ease;}
+.result-section{
+  padding:0.9rem 1rem;border-radius:10px;margin-bottom:0.9rem;
+  background:rgba(253,248,240,0.7);
+  border-left:3px solid var(--gold-light);
+}
+.result-section h5{
+  font-family:'Cinzel',serif;font-size:0.85rem;font-weight:600;
+  letter-spacing:0.06em;color:var(--deep-terra);margin-bottom:0.4rem;
+}
+.result-section p{color:var(--slate);line-height:1.75;font-size:0.97rem;}
+
+/* progress steps */
+.step-dots{
+  display:flex;gap:0.5rem;justify-content:center;margin-bottom:1.5rem;
+}
+.step-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(184,134,11,0.2);transition:all 0.3s;
+}
+.step-dot.done{background:var(--gold);}
+.step-dot.current{background:var(--terracotta);transform:scale(1.4);}
+
+/* ── Integration ── */
+.affirmation-list{display:flex;flex-direction:column;gap:0.8rem;}
+.aff-item{
+  display:flex;align-items:flex-start;gap:0.7rem;
+  padding:0.85rem 1rem;border-radius:10px;
+  background:rgba(196,118,90,0.06);
+  font-size:0.97rem;color:var(--slate);line-height:1.7;
+}
+.aff-sym{color:var(--terracotta);flex-shrink:0;margin-top:2px;font-family:'Cinzel',serif;}
+
+.closing-script{
+  background:linear-gradient(135deg,rgba(196,118,90,0.06),rgba(155,123,184,0.06));
+  border-radius:14px;padding:1.5rem 1.8rem;
+  border:1px solid rgba(155,123,184,0.18);
+  font-style:italic;color:var(--slate);line-height:1.9;font-size:0.97rem;
+}
+.closing-script strong{color:var(--deep-purple);font-style:normal;}
+
+/* ── Buttons ── */
+.btn-row{display:flex;gap:0.8rem;justify-content:flex-end;margin-top:1.8rem;flex-wrap:wrap;}
+.btn-primary{
+  padding:0.65rem 1.8rem;background:var(--grad-terra);color:#fff;
+  border:none;border-radius:50px;font-family:'Cinzel',serif;
+  font-size:0.82rem;font-weight:600;letter-spacing:0.08em;cursor:pointer;
+  box-shadow:0 4px 14px rgba(196,118,90,0.3);transition:all 0.25s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(196,118,90,0.38);}
+.btn-secondary{
+  padding:0.65rem 1.8rem;background:rgba(253,248,240,0.9);color:var(--deep-terra);
+  border:1.5px solid rgba(196,118,90,0.35);border-radius:50px;
+  font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;
+  cursor:pointer;transition:all 0.25s;
+}
+.btn-secondary:hover{background:rgba(196,118,90,0.07);transform:translateY(-2px);}
+.btn-small{
+  padding:0.5rem 1.2rem;background:var(--grad-sage);color:#fff;
+  border:none;border-radius:50px;font-family:'Cinzel',serif;
+  font-size:0.75rem;font-weight:600;letter-spacing:0.07em;cursor:pointer;
+  box-shadow:0 3px 10px rgba(94,170,168,0.25);transition:all 0.2s;
+}
+.btn-small:hover{transform:translateY(-2px);}
+
+/* ── Divider ── */
+.rune-divider{
+  text-align:center;margin:1.5rem 0;
+  font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.4em;
+  color:rgba(184,134,11,0.4);
+}
+
+/* ── Footer ── */
+footer{
+  text-align:center;padding:2rem 1rem;
+  color:var(--warm-gray);font-size:0.82rem;line-height:1.6;
+  font-family:'EB Garamond',serif;
+}
+footer a{color:var(--deep-teal);}
+
+/* ── Responsive ── */
+@media(max-width:680px){
+  .site-header h1{font-size:1.9rem;}
+  .container{padding:1rem;}
+  .card{padding:1.4rem;}
+  .nav-pill{font-size:0.72rem;padding:0.4rem 0.85rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="site-header">
+    <h1>What Is Here</h1>
+    <span class="ornament">◈ &nbsp; ✦ &nbsp; ◈</span>
+    <p class="tagline">Describing Emotions Without Judgment &nbsp;·&nbsp; Adult DBT Group</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-fill" id="progressFill" style="width:25%"></div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-pills">
+    <button class="nav-pill active" onclick="goTo(0)">Opening</button>
+    <button class="nav-pill" onclick="goTo(1)">The Skill</button>
+    <button class="nav-pill" onclick="goTo(2)">Vocabulary</button>
+    <button class="nav-pill" onclick="goTo(3)">Practice</button>
+  </div>
+
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PAGE 0 · OPENING & CHECK-IN         -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="page active" id="page0">
+
+    <div class="card">
+      <h2><div class="sym-badge sb-terra">◈</div> Welcome <span class="t-badge">5 min</span></h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.1rem;">
+        Today we're working with something foundational — the ability to notice and name what's actually here without immediately putting it on trial. 
+        Most of us have learned to evaluate our emotions before we've even finished feeling them. We're going to slow that down.
+      </p>
+
+      <div class="pass-note">
+        <span class="pass-sym">◇</span>
+        <div>Passes are always okay — on any question, at any point. Listening is full participation. Take what's useful and leave the rest.</div>
+      </div>
+
+      <div class="fac-wrap">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator opening script</button>
+        <div class="fac-body">
+          "Before we get into the material, I want to name what we're doing today and why it matters.
+          Most of us weren't taught to describe our emotions — we were taught to manage them, fix them, justify them, or hide them.
+          The skill we're practicing today is different: it's just noticing what's actually happening, and putting words to it without adding a verdict.
+          That sounds simple. It isn't. But it's one of the most powerful things you can learn to do.
+          As always, pass freely, go at your own pace, and there's no pressure to share anything you're not ready for."
+        </div>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <h2><div class="sym-badge sb-sage">✦</div> Breathing Anchor <span class="t-badge">3–4 min</span></h2>
+      <p style="color:var(--slate);line-height:1.8;margin-bottom:1.2rem;">
+        Before we check in, let's settle. Follow the circle below, or simply close your eyes and breathe.
+      </p>
+      <div class="breath-circle" id="breathCircle">BREATHE IN</div>
+      <div style="text-align:center;margin-top:0.5rem;">
+        <button class="btn-small" onclick="startBreath()" id="breathBtn">Begin Breathing Guide</button>
+      </div>
+      <div class="fac-wrap" style="margin-top:1.2rem;">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator note</button>
+        <div class="fac-body">
+          Keep this to 3 minutes maximum. The breathing anchor is to bring people into the body before asking them to observe it. 
+          You can lead it verbally instead of using the animation — "breathe in for four, hold for two, out for six."
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><div class="sym-badge sb-terra">◉</div> Check-In <span class="t-badge">10–12 min</span></h2>
+
+      <div class="pass-note">
+        <span class="pass-sym">◇</span>
+        <div>Each step is optional. Move at whatever pace works for you. You can stay with one step and skip others.</div>
+      </div>
+
+      <!-- Step dots -->
+      <div class="step-dots" id="checkinDots"></div>
+
+      <!-- Step 1: Body Scan -->
+      <div class="checkin-step active" id="cstep0">
+        <div class="step-counter">Step 1 of 4 — Body Scan</div>
+        <p style="color:var(--slate);line-height:1.8;margin-bottom:1rem;">
+          Take a slow breath. Starting at the top of your head, move your awareness downward. 
+          No need to change anything — just notice what's there.
+        </p>
+        <div class="ib sage">
+          <h4>Orienting Questions (internal, not for sharing)</h4>
+          <ul>
+            <li>Is there tension anywhere? Tightness? Openness?</li>
+            <li>Where does your breath land most easily?</li>
+            <li>What's the quality of your energy right now — high, low, scattered, settled?</li>
+          </ul>
+        </div>
+        <div style="text-align:right;margin-top:1rem;">
+          <button class="btn-small" onclick="nextCheckin(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Polyvagal zone -->
+      <div class="checkin-step" id="cstep1">
+        <div class="step-counter">Step 2 of 4 — Nervous System State</div>
+        <p style="color:var(--slate);line-height:1.8;margin-bottom:1rem;">
+          Which of these feels closest to where your nervous system is right now?
+        </p>
+        <div class="poly-grid">
+          <div class="poly-card grounded" onclick="selectPoly(this)">
+            <h5>◆ Grounded</h5>
+            <p>Settled, present, connected. Breath is accessible. Able to think and feel at the same time.</p>
+          </div>
+          <div class="poly-card activated" onclick="selectPoly(this)">
+            <h5>△ Activated</h5>
+            <p>Anxious, restless, on edge, or keyed up. May feel urgency, pressure, or a racing quality.</p>
+          </div>
+          <div class="poly-card withdrawn" onclick="selectPoly(this)">
+            <h5>◇ Withdrawn</h5>
+            <p>Flat, numb, distant, foggy. Low energy. May feel disconnected from the body or the room.</p>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextCheckin(0)">← Back</button>
+          <button class="btn-small" onclick="nextCheckin(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Emotion picker -->
+      <div class="checkin-step" id="cstep2">
+        <div class="step-counter">Step 3 of 4 — Emotional Weather</div>
+        <p style="color:var(--slate);line-height:1.8;margin-bottom:1rem;">
+          Select any words that feel true right now. You can pick more than one — or none.
+        </p>
+        <div class="emotion-grid" id="emotionPicker">
+          <div class="emo-chip" onclick="toggleEmo(this)">Calm</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Anxious</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Sad</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Angry</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Numb</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Hopeful</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Heavy</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Restless</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Grateful</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Overwhelmed</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Tender</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Unsettled</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Lonely</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Curious</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Tired</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Guarded</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Open</div>
+          <div class="emo-chip" onclick="toggleEmo(this)">Irritable</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextCheckin(1)">← Back</button>
+          <button class="btn-small" onclick="nextCheckin(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Bridge question -->
+      <div class="checkin-step" id="cstep3">
+        <div class="step-counter">Step 4 of 4 — Topic Bridge</div>
+        <p style="color:var(--slate);line-height:1.8;margin-bottom:1rem;">
+          One question to bring us into today's topic. Take your time. Pass is always fine.
+        </p>
+        <div class="ib terra" style="margin-bottom:0.8rem;">
+          <p style="font-style:italic;font-size:1.02rem;">
+            "When you notice an emotion — do you usually evaluate it first (should I feel this? is this okay?) or describe it first (what is this, exactly)? Which happens faster for you?"
+          </p>
+        </div>
+        <div class="fac-wrap">
+          <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator note</button>
+          <div class="fac-body">
+            This question lands the distinction before the psychoeducation does. 
+            Most people will recognize the evaluating pattern — "I shouldn't feel this way" or "this is bad" 
+            happens almost instantly. The point isn't to judge that habit; it's to make it visible so the group has something concrete to work with in the teaching section.
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextCheckin(2)">← Back</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="goTo(1)">The Skill →</button>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PAGE 1 · PSYCHOEDUCATION            -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="page" id="page1">
+
+    <div class="card">
+      <h2><div class="sym-badge sb-terra">◈</div> Describe vs. Evaluate</h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        Most of us were not taught to describe our emotions. We were taught to manage them. 
+        The difference is more significant than it sounds.
+      </p>
+
+      <div class="val-box">
+        <strong>The core distinction:</strong> Describing means noticing and naming what's actually happening — 
+        like a scientist observing data. Evaluating means adding a verdict about whether what's happening should be happening. 
+        Most of the suffering that comes from emotions is not from the emotion itself — 
+        it's from what we tell ourselves about it.
+      </div>
+
+      <div class="compare-wrap">
+        <div class="compare-side bad">
+          <h5>△ Evaluating</h5>
+          <ul>
+            <li>I shouldn't feel this way</li>
+            <li>This is bad / wrong / too much</li>
+            <li>Why am I always like this?</li>
+            <li>I need to get rid of this feeling</li>
+            <li>This means something is wrong with me</li>
+          </ul>
+        </div>
+        <div class="compare-side good">
+          <h5>◆ Describing</h5>
+          <ul>
+            <li>I notice something that feels like sadness</li>
+            <li>There's tightness in my chest right now</li>
+            <li>I'm feeling more activated than usual today</li>
+            <li>Something happened and anger arose</li>
+            <li>I notice a pulling-away feeling</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fac-wrap">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator note</button>
+        <div class="fac-body">
+          This distinction is easy to understand intellectually and very difficult in practice. 
+          Don't rush past the examples — read them aloud if it helps. 
+          The evaluating column will often produce recognition in the room. 
+          You can pause and ask "do any of these sound familiar?" before moving on.
+        </div>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <h2><div class="sym-badge sb-sage">◉</div> Observe — Describe — Participate</h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        These are the three core mindfulness "What Skills" in DBT. Together, they form a sequence 
+        for engaging with inner experience without being consumed by it or running from it.
+      </p>
+
+      <div class="odp-grid">
+        <div class="odp-card odp1">
+          <div class="odp-num">I</div>
+          <h5>Observe</h5>
+          <p>Notice what's happening without immediately reacting, labeling, or judging. Just attend to the experience itself. Step back and watch.</p>
+        </div>
+        <div class="odp-card odp2">
+          <div class="odp-num">II</div>
+          <h5>Describe</h5>
+          <p>Put words to what you observe — the facts, the sensations, the quality of the experience. Stick to what you can directly know. No interpretation yet.</p>
+        </div>
+        <div class="odp-card odp3">
+          <div class="odp-num">III</div>
+          <h5>Participate</h5>
+          <p>Once you've observed and described, you can engage more fully — from a place of clarity rather than reactivity. Throw yourself in without losing your footing.</p>
+        </div>
+      </div>
+
+      <div class="ib teal" style="margin-top:1rem;">
+        <h4>Why This Sequence Matters</h4>
+        <p>Most emotional suffering happens when we skip Observe and Describe and go straight to Participate — 
+        but from inside a story about the emotion rather than the emotion itself. 
+        The sequence creates a small gap between stimulus and response. 
+        That gap is where choice lives.</p>
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h2><div class="sym-badge sb-teal">✦</div> Secondary Emotions — The Emotion About the Emotion</h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        One of the most important concepts in describing emotions without judgment is 
+        understanding secondary suffering — what we add to an emotion by evaluating it.
+      </p>
+
+      <div class="secondary-wrap">
+        <div class="sec-label">The evaluating path:</div>
+        <div class="sec-row">
+          <div class="sec-box sec-primary">Sadness arises</div>
+          <div class="sec-arrow">→</div>
+          <div class="sec-box sec-judgment">"I shouldn't feel sad"</div>
+          <div class="sec-arrow">→</div>
+          <div class="sec-box sec-secondary">Shame about sadness</div>
+        </div>
+        <div class="rune-divider" style="margin:0.5rem 0;font-size:0.7rem;">◆ &nbsp; &nbsp; ◆</div>
+        <div class="sec-label">The describing path:</div>
+        <div class="sec-row">
+          <div class="sec-box sec-primary">Sadness arises</div>
+          <div class="sec-alt-arrow">→</div>
+          <div class="sec-box sec-describe">"I notice sadness"</div>
+          <div class="sec-alt-arrow">→</div>
+          <div class="sec-box sec-peace">Just sadness — no second layer</div>
+        </div>
+      </div>
+
+      <div class="val-box" style="margin-top:1.2rem;">
+        <strong>The point is not to eliminate feelings.</strong> Sadness will still be there in the second path. 
+        What changes is that you're not also dealing with shame, self-judgment, or the exhausting work of fighting 
+        what's already here. The emotion itself is often much more manageable than the emotion plus the verdict.
+      </div>
+
+      <div class="fac-wrap">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator note</button>
+        <div class="fac-body">
+          Secondary emotions are a significant source of suffering for most people in DBT groups. 
+          Common examples worth naming explicitly: anger about feeling anxious, shame about anger, 
+          fear about feeling numb, self-criticism about feeling sad. 
+          These second-layer emotions are often more activating than the original. 
+          You can ask the group: "Does anyone recognize this — feeling something, and then feeling bad about feeling it?"
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><div class="sym-badge sb-gold">◆</div> The Language of Describing</h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        The way we phrase emotion descriptions matters. "I am sad" fuses the self with the emotion. 
+        "I notice sadness" creates a small but meaningful distance — an observer perspective.
+      </p>
+
+      <div class="two-col">
+        <div class="ib terra">
+          <h4>Fused Language</h4>
+          <ul>
+            <li>I am anxious</li>
+            <li>I'm a mess</li>
+            <li>I'm depressed</li>
+            <li>I'm so angry</li>
+            <li>I'm broken</li>
+          </ul>
+        </div>
+        <div class="ib sage">
+          <h4>Observing Language</h4>
+          <ul>
+            <li>I notice anxiety arising</li>
+            <li>There's a lot happening right now</li>
+            <li>I'm experiencing something heavy today</li>
+            <li>Anger is present for me right now</li>
+            <li>Something feels fragmented today</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ib gold" style="margin-top:0.5rem;">
+        <h4>Useful Describing Stems</h4>
+        <ul>
+          <li>"I notice..."</li>
+          <li>"There's a feeling of..."</li>
+          <li>"Something that feels like..."</li>
+          <li>"Right now I'm experiencing..."</li>
+          <li>"I'm aware of..."</li>
+          <li>"In my body there's..."</li>
+        </ul>
+      </div>
+
+      <div class="expandable" style="margin-top:1rem;">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <h4>◇ &nbsp; What about body sensations?</h4>
+          <span class="exp-icon">+</span>
+        </div>
+        <div class="exp-body">
+          <p style="color:var(--slate);line-height:1.8;">
+            Emotions live in the body before they live in language. Describing body sensations is often 
+            easier and more precise than naming an emotion — and it bypasses the judgment reflex, 
+            because "tightness in my chest" is harder to evaluate than "anxiety."
+            <br><br>
+            Useful body description vocabulary: tightness, heaviness, warmth, coolness, pressure, 
+            fluttering, expansion, constriction, buzzing, stillness, holding, trembling, 
+            emptiness, fullness, weight, lightness.
+          </p>
+        </div>
+      </div>
+
+      <div class="expandable">
+        <div class="exp-header" onclick="toggleExp(this)">
+          <h4>◇ &nbsp; What if I don't know what I'm feeling?</h4>
+          <span class="exp-icon">+</span>
+        </div>
+        <div class="exp-body">
+          <p style="color:var(--slate);line-height:1.8;">
+            "I don't know" is a perfectly valid description. So is "something" or "a lot." 
+            Many people — especially those with trauma histories or alexithymia — have difficulty 
+            identifying emotions with precision. Starting with body sensations first is often more 
+            accessible. "I notice tension in my shoulders and a tightness in my throat" is more 
+            information than it might seem.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(0)">← Opening</button>
+      <button class="btn-primary" onclick="goTo(2)">Vocabulary →</button>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PAGE 2 · EMOTION VOCABULARY         -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="page" id="page2">
+
+    <div class="card">
+      <h2><div class="sym-badge sb-terra">◈</div> Expanding the Map <span class="t-badge">10–12 min</span></h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        One reason we default to judgment is that we don't have precise enough language for what's actually here. 
+        The more granular our vocabulary, the more accurately we can describe — and the less the experience 
+        collapses into a simple "good" or "bad."
+      </p>
+
+      <div class="pass-note">
+        <span class="pass-sym">◇</span>
+        <div>Browse at your own pace. Click any word to highlight it. There's no task here — just exploring the map.</div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Grief, Loss & Longing</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Sorrowful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Bereft</div>
+          <div class="vocab-word" onclick="pickWord(this)">Mournful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Wistful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Hollow</div>
+          <div class="vocab-word" onclick="pickWord(this)">Aching</div>
+          <div class="vocab-word" onclick="pickWord(this)">Yearning</div>
+          <div class="vocab-word" onclick="pickWord(this)">Forlorn</div>
+          <div class="vocab-word" onclick="pickWord(this)">Heavy</div>
+          <div class="vocab-word" onclick="pickWord(this)">Grieving</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Anxiety, Fear & Threat</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Apprehensive</div>
+          <div class="vocab-word" onclick="pickWord(this)">Dread</div>
+          <div class="vocab-word" onclick="pickWord(this)">Uneasy</div>
+          <div class="vocab-word" onclick="pickWord(this)">Hypervigilant</div>
+          <div class="vocab-word" onclick="pickWord(this)">Braced</div>
+          <div class="vocab-word" onclick="pickWord(this)">Foreboding</div>
+          <div class="vocab-word" onclick="pickWord(this)">Rattled</div>
+          <div class="vocab-word" onclick="pickWord(this)">Skittish</div>
+          <div class="vocab-word" onclick="pickWord(this)">Panicked</div>
+          <div class="vocab-word" onclick="pickWord(this)">Trepidatious</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Anger, Frustration & Injustice</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Agitated</div>
+          <div class="vocab-word" onclick="pickWord(this)">Indignant</div>
+          <div class="vocab-word" onclick="pickWord(this)">Seething</div>
+          <div class="vocab-word" onclick="pickWord(this)">Resentful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Irritated</div>
+          <div class="vocab-word" onclick="pickWord(this)">Outraged</div>
+          <div class="vocab-word" onclick="pickWord(this)">Disgusted</div>
+          <div class="vocab-word" onclick="pickWord(this)">Contemptuous</div>
+          <div class="vocab-word" onclick="pickWord(this)">Smoldering</div>
+          <div class="vocab-word" onclick="pickWord(this)">Bitter</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Shame, Guilt & Self-Criticism</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Exposed</div>
+          <div class="vocab-word" onclick="pickWord(this)">Humiliated</div>
+          <div class="vocab-word" onclick="pickWord(this)">Mortified</div>
+          <div class="vocab-word" onclick="pickWord(this)">Self-critical</div>
+          <div class="vocab-word" onclick="pickWord(this)">Remorseful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Contrite</div>
+          <div class="vocab-word" onclick="pickWord(this)">Unworthy</div>
+          <div class="vocab-word" onclick="pickWord(this)">Defective</div>
+          <div class="vocab-word" onclick="pickWord(this)">Embarrassed</div>
+          <div class="vocab-word" onclick="pickWord(this)">Culpable</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Disconnection & Numbness</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Detached</div>
+          <div class="vocab-word" onclick="pickWord(this)">Dissociated</div>
+          <div class="vocab-word" onclick="pickWord(this)">Flat</div>
+          <div class="vocab-word" onclick="pickWord(this)">Empty</div>
+          <div class="vocab-word" onclick="pickWord(this)">Foggy</div>
+          <div class="vocab-word" onclick="pickWord(this)">Deadened</div>
+          <div class="vocab-word" onclick="pickWord(this)">Absent</div>
+          <div class="vocab-word" onclick="pickWord(this)">Withdrawn</div>
+          <div class="vocab-word" onclick="pickWord(this)">Muted</div>
+          <div class="vocab-word" onclick="pickWord(this)">Hollow</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Warmth, Care & Connection</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Tender</div>
+          <div class="vocab-word" onclick="pickWord(this)">Moved</div>
+          <div class="vocab-word" onclick="pickWord(this)">Touched</div>
+          <div class="vocab-word" onclick="pickWord(this)">Affectionate</div>
+          <div class="vocab-word" onclick="pickWord(this)">Warmhearted</div>
+          <div class="vocab-word" onclick="pickWord(this)">Appreciative</div>
+          <div class="vocab-word" onclick="pickWord(this)">Fond</div>
+          <div class="vocab-word" onclick="pickWord(this)">Devoted</div>
+          <div class="vocab-word" onclick="pickWord(this)">Soft</div>
+          <div class="vocab-word" onclick="pickWord(this)">Open</div>
+        </div>
+      </div>
+
+      <div class="vocab-category">
+        <h4>◆ &nbsp; Hope, Aliveness & Meaning</h4>
+        <div class="vocab-words">
+          <div class="vocab-word" onclick="pickWord(this)">Anticipatory</div>
+          <div class="vocab-word" onclick="pickWord(this)">Hopeful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Energized</div>
+          <div class="vocab-word" onclick="pickWord(this)">Inspired</div>
+          <div class="vocab-word" onclick="pickWord(this)">Alive</div>
+          <div class="vocab-word" onclick="pickWord(this)">Eager</div>
+          <div class="vocab-word" onclick="pickWord(this)">Purposeful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Expansive</div>
+          <div class="vocab-word" onclick="pickWord(this)">Grateful</div>
+          <div class="vocab-word" onclick="pickWord(this)">Moved</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card teal">
+      <h2><div class="sym-badge sb-sage">✦</div> Large Group Discussion <span class="t-badge">12–15 min</span></h2>
+
+      <div class="pass-note">
+        <span class="pass-sym">◇</span>
+        <div>These are invitations. One question explored well is more valuable than five covered quickly.</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:0.9rem;">
+
+        <div class="ib terra">
+          <h4>Low-Demand Opener</h4>
+          <p style="font-style:italic;">Were there any words in that vocabulary list that surprised you — something that put language to something you didn't have a word for?</p>
+        </div>
+
+        <div class="ib sage">
+          <h4>The Evaluation Habit</h4>
+          <p style="font-style:italic;">What's a feeling you notice you tend to evaluate before you've even finished experiencing it — something that gets a verdict almost instantly?</p>
+        </div>
+
+        <div class="ib teal">
+          <h4>Secondary Emotions</h4>
+          <p style="font-style:italic;">Has anyone had the experience of feeling worse not because of the original emotion, but because of what you told yourself about it? What does that cycle look like for you?</p>
+        </div>
+
+        <div class="ib purple">
+          <h4>The Language Shift</h4>
+          <p style="font-style:italic;">What's the difference — for anyone who's tried it — between saying "I am anxious" and "I notice anxiety"? Does the phrasing change anything for you?</p>
+        </div>
+
+        <div class="ib gold">
+          <h4>Deeper</h4>
+          <p style="font-style:italic;">Where did you learn to evaluate your emotions rather than describe them? Were feelings in your family growing up treated as problems to be solved, or as something worth just noticing?</p>
+        </div>
+
+      </div>
+
+      <div class="fac-wrap">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator notes</button>
+        <div class="fac-body">
+          <strong>Sequence:</strong> Start with the vocabulary opener — it's concrete, low-demand, and usually generates real engagement. 
+          The evaluation habit question tends to produce strong recognition. 
+          The secondary emotions question can bring up grief and relief simultaneously — some people have never had language for that cycle. 
+          The "where did you learn this" question is the deepest and most optional — use it if the group has energy and time; skip if you're running long.
+          <br><br>
+          <strong>Watch for:</strong> People who describe their emotions very diagnostically ("I have depression, so I feel...") — gently invite them back to what's actually happening in the body right now. Also watch for the group using the describing language somewhat mechanically at first; that's fine. It takes practice for it to feel real.
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(1)">← The Skill</button>
+      <button class="btn-primary" onclick="goTo(3)">Practice →</button>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════ -->
+  <!-- PAGE 3 · PRACTICE & INTEGRATION     -->
+  <!-- ═══════════════════════════════════ -->
+  <div class="page" id="page3">
+
+    <div class="card">
+      <h2><div class="sym-badge sb-terra">◈</div> Description Builder <span class="t-badge">15–20 min</span></h2>
+
+      <p style="color:var(--slate);line-height:1.85;margin-bottom:1.2rem;">
+        This tool walks you through building a full non-judgmental emotion description step by step. 
+        Work with something real — a feeling from earlier today, this week, or right now.
+      </p>
+
+      <div class="pass-note">
+        <span class="pass-sym">◇</span>
+        <div>You don't have to share your answers with the group. This can be entirely private. Write at whatever depth feels right.</div>
+      </div>
+
+      <div class="step-dots" id="practiceDots"></div>
+
+      <!-- Practice Step 1 -->
+      <div class="pstep active" id="ps0">
+        <div class="pstep-num">Step 1 of 5 — Identify the Feeling</div>
+        <div class="input-group">
+          <label>Name an emotion or inner experience you've been carrying recently. <em>Don't worry about being precise yet — just get it on paper.</em></label>
+          <textarea id="p1feeling" placeholder="Example: Something like anger, or maybe just a heaviness I can't name..."></textarea>
+        </div>
+        <div class="input-group">
+          <label>Roughly when did you first notice it?</label>
+          <select id="p1when">
+            <option value="">Select...</option>
+            <option>Right now, in this moment</option>
+            <option>Earlier today</option>
+            <option>In the last few days</option>
+            <option>This week</option>
+            <option>It's been ongoing for a while</option>
+          </select>
+        </div>
+        <div style="text-align:right;margin-top:1rem;">
+          <button class="btn-small" onclick="nextPractice(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Practice Step 2 -->
+      <div class="pstep" id="ps1">
+        <div class="pstep-num">Step 2 of 5 — Body Observation</div>
+        <div class="input-group">
+          <label>Where do you feel this in your body? Describe the physical sensations — not the story, just what's happening in the body. <em>Examples: tightness in chest, heat in face, sinking in stomach, stillness, constriction in throat...</em></label>
+          <textarea id="p2body" placeholder="Example: There's a kind of pressure behind my sternum. My shoulders are high and held. My jaw is slightly clenched."></textarea>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextPractice(0)">← Back</button>
+          <button class="btn-small" onclick="nextPractice(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Practice Step 3 -->
+      <div class="pstep" id="ps2">
+        <div class="pstep-num">Step 3 of 5 — The Story You Added</div>
+        <div class="input-group">
+          <label>What have you been telling yourself <em>about</em> this feeling? Include any judgments, should/shouldn't, self-criticism, or evaluations — the inner commentary.</label>
+          <textarea id="p3story" placeholder="Example: I shouldn't still be this angry about something so small. What's wrong with me? I need to get over this."></textarea>
+        </div>
+        <div class="ib purple" style="margin-top:0.5rem;">
+          <h4>Notice</h4>
+          <p>This step isn't asking you to stop having those thoughts — just to see them clearly as something added to the original experience, not the experience itself.</p>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextPractice(1)">← Back</button>
+          <button class="btn-small" onclick="nextPractice(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Practice Step 4 -->
+      <div class="pstep" id="ps3">
+        <div class="pstep-num">Step 4 of 5 — Secondary Emotions</div>
+        <div class="input-group">
+          <label>Is there an emotion about this emotion? What do you feel when you notice you're feeling what you named in step one? <em>Examples: shame about anger, fear about sadness, frustration about numbness...</em></label>
+          <textarea id="p4secondary" placeholder="Example: I feel ashamed that I'm still angry. And underneath that, I notice some sadness."></textarea>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextPractice(2)">← Back</button>
+          <button class="btn-small" onclick="nextPractice(4)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Practice Step 5 -->
+      <div class="pstep" id="ps4">
+        <div class="pstep-num">Step 5 of 5 — The Clean Description</div>
+        <div class="input-group">
+          <label>Now write a non-judgmental description of this feeling — what's actually here, without the verdict. Use "I notice..." language if it helps. Stick to what you can directly observe, including body sensations.</label>
+          <textarea id="p5clean" placeholder="Example: I notice something that feels like anger — heat in my face, tension through my arms, a kind of forward pressure in my chest. The anger seems to be connected to feeling dismissed. I notice it's been here since Tuesday. Right now it's about a 6 out of 10."></textarea>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.5rem;">
+          <button class="btn-secondary" onclick="nextPractice(3)">← Back</button>
+          <button class="btn-primary" onclick="buildReflection()">Generate Reflection</button>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-box" id="practiceResult">
+        <h3 style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;letter-spacing:0.05em;color:var(--midnight);margin-bottom:1.2rem;">◈ &nbsp; Your Description</h3>
+        <div id="resultContent"></div>
+        <div style="margin-top:1.2rem;padding:1rem 1.2rem;background:rgba(184,134,11,0.06);border-radius:10px;border:1px solid rgba(184,134,11,0.15);">
+          <p style="font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.05em;color:var(--gold);margin-bottom:0.4rem;">◆ &nbsp; Integration Invitation</p>
+          <p style="color:var(--slate);font-size:0.95rem;line-height:1.8;">
+            Notice the difference between your step 3 (the story you added) and your step 5 (the clean description). 
+            That distance is the skill. The feeling in step 5 is something you can be with. 
+            The story in step 3 is something that tends to make everything harder.
+          </p>
+        </div>
+        <div style="text-align:right;margin-top:1rem;">
+          <button class="btn-secondary" onclick="clearPractice()">Start Again</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Closing -->
+    <div class="card gold">
+      <h2><div class="sym-badge sb-gold">✦</div> Things Worth Carrying Out</h2>
+
+      <div class="affirmation-list">
+        <div class="aff-item">
+          <span class="aff-sym">◆</span>
+          <div>Describing is not the same as approving. You can notice anger without deciding anger is correct. You can observe sadness without deciding it's acceptable. The description is neutral — the emotion is not on trial.</div>
+        </div>
+        <div class="aff-item">
+          <span class="aff-sym">◆</span>
+          <div>Most emotional suffering has two layers: the original feeling, and the verdict you add to it. You can only change the second layer. The first one is just what's here.</div>
+        </div>
+        <div class="aff-item">
+          <span class="aff-sym">◆</span>
+          <div>You do not have to fix what you name. Naming an emotion clearly and precisely is itself a form of regulation — not because it makes it go away, but because it makes it less overwhelming.</div>
+        </div>
+        <div class="aff-item">
+          <span class="aff-sym">◆</span>
+          <div>The gap between stimulus and response is where choice lives. Observe and describe are how you create that gap.</div>
+        </div>
+        <div class="aff-item">
+          <span class="aff-sym">◆</span>
+          <div>Not knowing what you're feeling is also data. "Something is here and I can't name it yet" is a valid and honest description.</div>
+        </div>
+      </div>
+
+      <div class="rune-divider">◈ &nbsp; ✦ &nbsp; ◈</div>
+
+      <div class="closing-script">
+        "What we practiced today is simple but not easy — noticing what's here and naming it, 
+        without immediately putting it on trial.
+        <br><br>
+        Most of us have been doing the opposite for a long time. The habit of evaluating 
+        runs deep. Today we just started to see it — and that's enough.
+        <br><br>
+        Before you go, if you're willing: one word for something you're taking from today. 
+        Not something you resolved — just something you're carrying with you.
+        <br><br>
+        <strong>Thank you for doing this work.</strong>"
+      </div>
+
+      <div class="fac-wrap" style="margin-top:1.1rem;">
+        <button class="fac-btn" onclick="toggleFac(this)">▶ &nbsp; Facilitator note</button>
+        <div class="fac-body">
+          The one-word checkout is deliberately low-demand. After a session about describing emotions, 
+          asking for one word is itself a practice — they're doing the skill in the closing. 
+          If the group is tired or has been emotionally activated, one word is enough. 
+          Don't push for more.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="btn-row" style="justify-content:flex-start;">
+      <button class="btn-secondary" onclick="goTo(2)">← Vocabulary</button>
+    </div>
+
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Adult DBT Group &nbsp;·&nbsp; Facilitator: Brian Nuckols &nbsp;·&nbsp; Center for Discovery</p>
+  <p style="margin-top:0.4rem;">
+    If you are in crisis or need immediate support:
+    <a href="tel:988">988 Suicide &amp; Crisis Lifeline</a> &nbsp;|&nbsp;
+    <a href="tel:741741">Crisis Text Line: text HOME to 741741</a>
+  </p>
+</footer>
+
+<script>
+/* ── Navigation ── */
+const pages = document.querySelectorAll('.page');
+const pills = document.querySelectorAll('.nav-pill');
+const pct   = [25, 50, 75, 100];
+
+function goTo(i){
+  pages.forEach((p,idx) => p.classList.toggle('active', idx===i));
+  pills.forEach((p,idx) => p.classList.toggle('active', idx===i));
+  document.getElementById('progressFill').style.width = pct[i]+'%';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ── Facilitator toggles ── */
+function toggleFac(btn){
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.childNodes[0].nodeValue = body.classList.contains('open') ? '▼  ' : '▶  ';
+}
+
+/* ── Expandables ── */
+function toggleExp(header){
+  const body = header.nextElementSibling;
+  const icon = header.querySelector('.exp-icon');
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+/* ── Breathing animation ── */
+let breathInterval = null;
+function startBreath(){
+  const circle = document.getElementById('breathCircle');
+  const btn    = document.getElementById('breathBtn');
+  if(breathInterval){ clearInterval(breathInterval); breathInterval=null; btn.textContent='Begin Breathing Guide'; circle.classList.remove('inhale','exhale'); circle.textContent='BREATHE IN'; return; }
+  btn.textContent = 'Stop';
+  let phase = 0;
+  const phases = [
+    {cls:'inhale', text:'BREATHE IN',  dur:4000},
+    {cls:'inhale', text:'HOLD',        dur:2000},
+    {cls:'exhale', text:'BREATHE OUT', dur:6000},
+  ];
+  function nextPhase(){
+    circle.classList.remove('inhale','exhale');
+    circle.textContent = phases[phase].text;
+    void circle.offsetWidth;
+    circle.classList.add(phases[phase].cls);
+    breathInterval = setTimeout(()=>{ phase=(phase+1)%phases.length; nextPhase(); }, phases[phase].dur);
+  }
+  nextPhase();
+}
+
+/* ── Check-in steps ── */
+const checkinSteps = document.querySelectorAll('.checkin-step');
+initDots('checkinDots', checkinSteps.length);
+
+function nextCheckin(i){
+  checkinSteps.forEach((s,idx) => s.classList.toggle('active', idx===i));
+  updateDots('checkinDots', checkinSteps.length, i);
+}
+
+function selectPoly(card){
+  document.querySelectorAll('.poly-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+}
+
+function toggleEmo(chip){
+  chip.classList.toggle('selected');
+}
+
+/* ── Practice steps ── */
+const practiceSteps = document.querySelectorAll('.pstep');
+initDots('practiceDots', practiceSteps.length);
+
+function nextPractice(i){
+  practiceSteps.forEach((s,idx) => s.classList.toggle('active', idx===i));
+  updateDots('practiceDots', practiceSteps.length, i);
+}
+
+/* ── Dot helpers ── */
+function initDots(id, count){
+  const wrap = document.getElementById(id);
+  for(let i=0;i<count;i++){
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i===0?' current':'');
+    wrap.appendChild(d);
+  }
+}
+function updateDots(id, count, current){
+  const dots = document.getElementById(id).querySelectorAll('.step-dot');
+  dots.forEach((d,i)=>{
+    d.className = 'step-dot';
+    if(i < current) d.classList.add('done');
+    else if(i === current) d.classList.add('current');
+  });
+}
+
+/* ── Vocabulary pick ── */
+function pickWord(el){ el.classList.toggle('picked'); }
+
+/* ── Build reflection ── */
+function buildReflection(){
+  const f1 = document.getElementById('p1feeling').value.trim();
+  const f2 = document.getElementById('p2body').value.trim();
+  const f3 = document.getElementById('p3story').value.trim();
+  const f4 = document.getElementById('p4secondary').value.trim();
+  const f5 = document.getElementById('p5clean').value.trim();
+
+  if(!f1 && !f5){ alert('Fill in at least step 1 and step 5 to build a reflection.'); return; }
+
+  let html = '';
+
+  if(f1) html += `<div class="result-section"><h5>◆ The Feeling</h5><p>${f1}</p></div>`;
+  if(f2) html += `<div class="result-section"><h5>◆ Body Sensations</h5><p>${f2}</p></div>`;
+  if(f3) html += `<div class="result-section" style="border-left-color:var(--soft-purple)"><h5>◇ The Story Added</h5><p style="font-style:italic;color:var(--warm-gray);">${f3}</p></div>`;
+  if(f4) html += `<div class="result-section" style="border-left-color:var(--deep-terra)"><h5>◇ Secondary Emotion</h5><p>${f4}</p></div>`;
+  if(f5) html += `<div class="result-section" style="border-left-color:var(--deep-sage);background:rgba(135,168,120,0.06)"><h5>◆ Clean Description</h5><p><em>${f5}</em></p></div>`;
+
+  document.getElementById('resultContent').innerHTML = html;
+  const box = document.getElementById('practiceResult');
+  box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function clearPractice(){
+  ['p1feeling','p2body','p3story','p4secondary','p5clean'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('p1when').value='';
+  document.getElementById('practiceResult').classList.remove('show');
+  nextPractice(0);
+}
+</script>
+</body>
+</html>
